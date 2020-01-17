@@ -1,0 +1,4 @@
+drop table inceminador
+drop table inceminar
+drop table pecuarista
+drop table vacas

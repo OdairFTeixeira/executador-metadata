@@ -1,0 +1,22 @@
+CREATE TABLE inceminador
+(
+  inceminador_id serial,
+  nome character varying NOT NULL,
+  endereco character varying NOT NULL,
+  numero integer NOT NULL,
+  CONSTRAINT inceminador_pkey PRIMARY KEY (inceminador_id)
+);
+
+CREATE TABLE inceminar
+(
+  inceminar_id serial,
+  inceminador_id integer NOT NULL,
+  raca character varying NOT NULL,
+  nom_touro character varying NOT NULL,
+  data character varying NOT NULL,
+  tipo_de_cio character varying NOT NULL,
+  CONSTRAINT inceminar_pkey PRIMARY KEY (inceminar_id),
+  CONSTRAINT inceminar_inceminador_fk FOREIGN KEY (inceminador_id)
+      REFERENCES inceminador (inceminador_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);

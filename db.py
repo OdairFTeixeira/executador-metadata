@@ -1,23 +1,37 @@
 import psycopg2
+import os
 
+arquivosPasta = []
+for _, _, arquivo in os.walk('/home/odair/java/workspace/pyhton/DB project'):
+    arquivosPasta.append(arquivo)
 
-def lerArquivos(): 
-	arquivo = open('122.txt', 'r')
+def arquivosTxt(array):
+	arquivos = []
+	for item in array:
+		split = item.split('txt')
+		if (len(split) == 2):
+			arquivos.append(item)
+	return arquivos
+
+def lerArquivos(arquivo): 
+	arquivo = open(arquivo, 'r')
 	texto = arquivo.read()
 	sql = texto.split('\n\n')
 	return sql
 
-sql = lerArquivos() 
+arquivos = arquivosTxt(arquivosPasta[0])
 
-con = psycopg2.connect(host='localhost', database='Teste',
+
+con = psycopg2.connect(host='localhost', database='teste',
 user='postgres', password='postgres')
 cur = con.cursor()
 
-for number in range(0, len(sql)):
-	cur.execute(sql[number])
-
-con.commit()
+for arquivo in arquivos:
+	sql = lerArquivos(arquivo) 
+	for number in range(0, len(sql)):
+		cur.execute(sql[number])
+	con.commit()
+	print 'Arquivo' , arquivo, 'executado com sucesso!!' 
+	
 con.close()
-print('Finalizando...')
-print('-' * 100)
 print('CONCLUIDO')

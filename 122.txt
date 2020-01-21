@@ -1,29 +1,22 @@
-CREATE TABLE pecuarista
+CREATE TABLE inceminador
 (
-  pecuarista_id serial,
+  inceminador_id serial,
   nome character varying NOT NULL,
   endereco character varying NOT NULL,
-  num_animais integer NOT NULL,
-  telefone integer NOT NULL,
-  CONSTRAINT pecuarista_pkey PRIMARY KEY (pecuarista_id)
-)
+  numero integer NOT NULL,
+  CONSTRAINT inceminador_pkey PRIMARY KEY (inceminador_id)
+);
 
-CREATE TABLE vacas
+CREATE TABLE inceminar
 (
-  vaca_id serial,
-  num_brinco integer NOT NULL,
+  inceminar_id serial,
+  inceminador_id integer NOT NULL,
   raca character varying NOT NULL,
-  pecuarista_id integer,
-  data_de_nascimento character varying NOT NULL,
-  pelagem character varying NOT NULL,
-  peso numeric NOT NULL,
-  inceminar_id integer,
-  CONSTRAINT vacas_pkey PRIMARY KEY (vaca_id),
-  CONSTRAINT vacas_inceminar_fk FOREIGN KEY (inceminar_id)
-      REFERENCES inceminar (inceminar_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT vacas_pecuarista_fk FOREIGN KEY (pecuarista_id)
-      REFERENCES pecuarista (pecuarista_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT brinco_nao_repetido_uq UNIQUE (num_brinco)
+  nom_touro character varying NOT NULL,
+  data character varying NOT NULL,
+  tipo_de_cio character varying NOT NULL,
+  CONSTRAINT inceminar_pkey PRIMARY KEY (inceminar_id),
+  CONSTRAINT inceminar_inceminador_fk FOREIGN KEY (inceminador_id)
+      REFERENCES inceminador (inceminador_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
 );

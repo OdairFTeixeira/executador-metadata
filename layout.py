@@ -1,27 +1,28 @@
 import PySimpleGUI as sg
 
-sg.theme('Dark Blue 3')   # Add a touch of color
-sg.theme_background_color('white')
-# # All the stuff inside your window.
-layout = [ [sg.Text('Bem vindo ao executador de metadatas', text_color='black', background_color='white')],
-            [sg.Text('Usuario Postgres: ', size=(39, 1), text_color='black', background_color='white'),
-             sg.Text('Senha Postgres:', size=(39, 1), text_color='black', background_color='white')],
-            [sg.Input('postgres', size=(45, 1)), sg.Input('postgres', size=(45, 1))],
-            [sg.Text('Em qual database deseja executar?', size=(39, 1), text_color='black', background_color='white')],
-            [sg.Input(size=(92, 1))],
-            [sg.Text('Informe a pasta dos scrips: ', text_color='black', background_color='white')],
-            [sg.Input(size=(82, 1)), sg.FolderBrowse('Procurar')],
-            [sg.Text('Arquivos encontrados: ', text_color='black', background_color='white')],
-            [sg.Listbox(values=(), size=(92, 7))],
-            [sg.Button('Ok'), sg.Button('Cancel')]]
+arquivos = []
 
-# Create the Window
+sg.theme_background_color('white')
+layout = [  [sg.Text('Usuario Postgres: ', size=(39, 1), text_color='black', background_color='white'),
+             sg.Text('Senha Postgres:', size=(39, 1), text_color='black', background_color='white')],
+            [sg.Input('postgres', size=(45, 1), key='usuario'), sg.Input('postgres', size=(45, 1), key='senha')],
+            [sg.Text('Database em que o script será rodado:', size=(39, 1), text_color='black',
+                     background_color='white')],
+            [sg.Input(size=(92, 1), key='database')],
+            [sg.Text('Informe a pasta dos scrips: ', text_color='black', background_color='white')],
+            [sg.Input(size=(82, 1), key='diretorio'), sg.FolderBrowse('Procurar')],
+            [sg.Text('Arquivos encontrados: ', text_color='black', background_color='white')],
+            [sg.Listbox(values=[], size=(92, 7), key='files')],
+            [sg.Text(size=(64, 3), background_color='white'), sg.Button('Cancelar'), sg.Button('Executar')]]
+
+
 window = sg.Window('Executador de Metadatas', layout)
-# Event Loop to process "events" and get the "values" of the inputs
+
 while True:
     event, values = window.read()
-    if event in (None, 'Cancel'):   # if user closes window or clicks cancel
+    if event in (None, 'Cancelar'):
         break
-    print('You entered ', values[0])
+    print(values['usuario'], values['senha'], values['database'], values['diretorio'], values['files'])
+    window.FindElement('files').Update(values=arquivos)
 
 window.close()

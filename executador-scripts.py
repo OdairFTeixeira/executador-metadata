@@ -2,7 +2,9 @@ import PySimpleGUI as sg
 import psycopg2
 import os
 
+icon_file = './icons/data.png'
 sg.theme_background_color('white')
+sg.set_options(icon=icon_file)
 layout = [[sg.Text('Usuario Postgres: ', size=(39, 1), text_color='black', background_color='white'),
            sg.Text('Senha Postgres:', size=(39, 1), text_color='black', background_color='white')],
           [sg.Input('postgres', size=(45, 1), key='usuario'), sg.Input('postgres', size=(45, 1), key='senha')],
@@ -16,7 +18,6 @@ layout = [[sg.Text('Usuario Postgres: ', size=(39, 1), text_color='black', backg
           [sg.Text(size=(64, 3), background_color='white'), sg.Button('Cancelar'), sg.Button('Executar')]]
 
 window = sg.Window('Executador de Metadatas', layout)
-
 
 def arquivosTxt(array):
     arquivos = []
@@ -54,10 +55,9 @@ while True:
                 cur.execute(sql[number])
             con.commit()
             print('Arquivo', arquivo, 'executado com sucesso!!')
-
-    if event in (None, 'Cancelar'):
-        con.close()
+        sg.popup('Concluido')
         break
 
-
+    if event in (None, 'Cancelar'):
+        break
 window.close()

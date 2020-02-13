@@ -1,0 +1,16 @@
+create table vendedor(
+	id serial primary key,
+	nome varchar,
+	cpf varchar,
+	setor varchar
+);
+
+create table venda(
+id serial primary key,
+vendedor integer not null,
+cliente integer not null,
+produto integer not null,
+CONSTRAINT venda_vendedor_fk FOREIGN KEY (vendedor) references vendedor(id),
+CONSTRAINT venda_produto_fk FOREIGN KEY (produto) references produto(id),
+CONSTRAINT venda_cliente_fk FOREIGN KEY (cliente) references cliente(id)
+);

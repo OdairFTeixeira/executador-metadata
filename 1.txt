@@ -1,0 +1,11 @@
+create table produto(
+	id serial primary key,
+	nome varchar,
+	preco numeric
+);
+
+create table cliente(
+	id serial primary key ,
+	nome varchar,
+	cpf varchar
+);

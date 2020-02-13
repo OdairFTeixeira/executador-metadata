@@ -55,7 +55,7 @@ while True:
                 cur.execute(sql[number])
             con.commit()
             print('Arquivo', arquivo, 'executado com sucesso!!')
-        sg.popup('Concluido')
+        print('xXx --Concluido-- xXx')
         break
 
     if event in (None, 'Cancelar'):

@@ -3,19 +3,19 @@ import psycopg2
 import os
 
 icon_file = './icons/data.png'
-sg.theme_background_color('#CFB3FF')
+sg.theme_background_color('#0e0e0e')
 sg.set_options(icon=icon_file)
-layout = [[sg.Text('Usuario Postgres: ', size=(39, 1), text_color='black', background_color='#CFB3FF'),
-           sg.Text('Senha Postgres:', size=(39, 1), text_color='black', background_color='#CFB3FF')],
+layout = [[sg.Text('Usuario Postgres: ', size=(45, 1), text_color='white', background_color='#0e0e0e'),
+           sg.Text('Senha Postgres:', size=(39, 1), text_color='white', background_color='#0e0e0e')],
           [sg.Input('postgres', size=(45, 1), key='usuario'), sg.Input('postgres', size=(45, 1), key='senha')],
-          [sg.Text('Database em que o script será rodado:', size=(39, 1), text_color='black',
-                   background_color='#CFB3FF')],
+          [sg.Text('Database em que o script será rodado:', size=(39, 1), text_color='white',
+                   background_color='#0e0e0e')],
           [sg.Input(size=(92, 1), key='database')],
-          [sg.Text('Informe a pasta dos scrips: ', text_color='black', background_color='#CFB3FF')],
+          [sg.Text('Informe a pasta dos scrips: ', text_color='white', background_color='#0e0e0e')],
           [sg.Input(size=(82, 1), key='diretorio', enable_events=True), sg.FolderBrowse('Procurar')],
-          [sg.Text('Arquivos encontrados: ', text_color='black', background_color='#CFB3FF')],
+          [sg.Text('Arquivos encontrados: ', text_color='white', background_color='#0e0e0e')],
           [sg.Listbox(values=[], size=(92, 7), key='files')],
-          [sg.Text(size=(64, 3), background_color='#CFB3FF'), sg.Button('Cancelar'), sg.Button('Executar')]]
+          [sg.Text(size=(64, 3), background_color='#0e0e0e'), sg.Button('Cancelar'), sg.Button('Executar')]]
 
 window = sg.Window('Executador de Metadatas', layout)
 
